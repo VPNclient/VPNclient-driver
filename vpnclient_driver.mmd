@@ -1,0 +1,15 @@
+sequenceDiagram
+    participant App as VPNclient App
+    participant Driver as VPNclient Driver
+    participant TUN as TUN/TAP
+    participant SOCKS as SOCKS5
+    
+    App->>Driver: Инициализация (SOCKS5 параметры)
+    Driver->>TUN: Создание интерфейса
+    Driver->>SOCKS: Установка соединения
+    loop Работа
+        TUN->>Driver: Пакет данных
+        Driver->>SOCKS: Пересылка пакета
+        SOCKS->>Driver: Ответ
+        Driver->>TUN: Запись ответа
+    end

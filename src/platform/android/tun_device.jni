@@ -1,0 +1,24 @@
+public class VpnService extends android.net.VpnService {
+    private ParcelFileDescriptor tunInterface;
+    
+    public void startVpn(String socks5Host, int socks5Port) {
+        Builder builder = new Builder();
+        builder.setMtu(1500);
+        builder.addAddress("10.8.0.2", 24);
+        
+        tunInterface = builder.establish();
+        
+        new Thread(() -> {
+            FileInputStream in = new FileInputStream(tunInterface.getFileDescriptor());
+            byte[] packet = new byte[32767];
+            
+            while (true) {
+                int length = in.read(packet);
+                // Отправка через SOCKS5
+                nativeSendToSocks5(packet, length);
+            }
+        }).start();
+    }
+    
+    private native void nativeSendToSocks5(byte[] data, int length);
+}

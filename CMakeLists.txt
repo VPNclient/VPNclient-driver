@@ -1,21 +1,20 @@
 cmake_minimum_required(VERSION 3.10)
-project(VPNClientEngineLinux)
+project(vpnclient_driver)
 
-set(CMAKE_C_STANDARD 11)
-
-# Настройка OpenSSL
-find_package(OpenSSL REQUIRED)
-
-# Основная библиотека
-add_library(vpnclient_engine_linux STATIC
-    src/vpnclient_engine_linux.c
-#    src/tun_device.c
-#    src/crypto.c
+add_library(vpnclient_driver STATIC
+    src/core/driver.c
+    src/core/socks5.c
 )
 
-target_include_directories(vpnclient_engine_linux PUBLIC include)
-target_link_libraries(vpnclient_engine_linux OpenSSL::SSL OpenSSL::Crypto)
+if(WIN32)
+    add_library(platform STATIC src/platform/windows/tap_device.c)
+#elseif(ANDROID)
+#    add_library(platform STATIC src/platform/android/tun_device.jni)
+elseif(APPLE)
+    add_library(platform STATIC src/platform/macos/tun_device.c)
+else()
+    add_library(platform STATIC src/platform/linux/tun_device.c)
+endif()
 
-# Тесты
-add_executable(test_client test/test_vpnclient_engine_linux.c)
-target_link_libraries(test_client vpnclient_engine_linux)
+target_include_directories(vpnclient_driver PUBLIC include)
+target_link_libraries(vpnclient_driver PRIVATE platform)
