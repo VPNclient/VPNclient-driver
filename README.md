@@ -2,7 +2,7 @@
 
 Cross-platform VPN client driver leveraging TUN/TAP devices and SOCKS5 protocol for seamless, secure, and performant network communication across Android, iOS, Windows, Linux, and macOS.
 
-## Architecture
+## 🏗️ Architecture Overview
 
 ```mermaid
 sequenceDiagram
