@@ -1,4 +1,42 @@
-# VPN Client Driver (vpnclient_driver)
+# 🚀 VPNclient Driver (vpnclient_driver)
 
-![VPN Client Driver](https://github.com/VPNclient/VPNclient-engin-linux/blob/f6d692e8ee00d1369531000db3299476e62bec69/docs/assets/vpnclient_driver.png)
+Cross-platform VPN client driver leveraging TUN/TAP devices and SOCKS5 protocol for seamless, secure, and performant network communication across Android, iOS, Windows, Linux, and macOS.
 
+## Architecture
+
+```mermaid
+sequenceDiagram
+    participant App as VPNclient App
+    participant Driver as VPNclient Driver
+    participant TUN as TUN/TAP
+    participant SOCKS as SOCKS5
+    
+    App->>Driver: Инициализация (SOCKS5 параметры)
+    Driver->>TUN: Создание интерфейса
+    Driver->>SOCKS: Установка соединения
+    loop Работа
+        TUN->>Driver: Пакет данных
+        Driver->>SOCKS: Пересылка пакета
+        SOCKS->>Driver: Ответ
+        Driver->>TUN: Запись ответа
+    end
+```
+
+## Quick Start 🏁
+
+### Clone and Build
+
+```bash
+git clone https://github.com/VPNclient/vpnclient_driver.git
+cd vpnclient_driver
+mkdir build
+
+# Static library
+make static
+
+# Shared library
+make shared
+```
+
+## Contributions 💡
+Contributions, issues, and feature requests are welcome! 🌟
