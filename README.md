@@ -2,7 +2,7 @@
 
 Cross-platform VPN client driver leveraging TUN/TAP devices and SOCKS5 protocol for seamless, secure, and performant network communication across Android, iOS, Windows, Linux, and macOS.
 
-## Architecture
+## 🏗️ Architecture Overview
 
 ```mermaid
 sequenceDiagram
@@ -38,7 +38,14 @@ make static
 make shared
 ```
 
-## Contributions 💡
-Contributions, issues, and feature requests are welcome! 🌟
+## 🤝 Contributing
+We welcome contributions! Please fork the repository and submit pull requests.
 
+## 📜 License
 
+This project is licensed under the **VPNclient Extended GNU General Public License v3 (GPL v3)**. See [LICENSE.md](LICENSE.md) for details.
+
+⚠️ **Note:** By using this software, you agree to comply with additional conditions outlined in the [VPNсlient Extended GNU General Public License v3 (GPL v3)](LICENSE.md)
+
+## 💬 Support
+For issues or questions, please open an issue on our GitHub repository.
